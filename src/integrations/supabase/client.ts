@@ -17,8 +17,13 @@ export type Database = {
         Row: LandingPageSignup;
         Insert: LandingPageSignup;
         Update: Partial<LandingPageSignup>;
+        Relationships: [];
       };
     };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
+    Enums: Record<string, never>;
+    CompositeTypes: Record<string, never>;
   };
 };
 
