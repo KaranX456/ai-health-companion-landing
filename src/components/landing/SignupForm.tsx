@@ -66,7 +66,7 @@ export function SignupForm() {
   if (status === "done") {
     return (
       <div className="rounded-3xl border border-border bg-surface p-8 text-center shadow-soft">
-        <h3 className="font-display text-xl font-semibold text-ink">Thanks — we&apos;ll be in touch.</h3>
+        <h3 className="font-sans text-xl font-semibold text-ink">Thanks — we&apos;ll be in touch.</h3>
         <p className="mt-2 text-sm text-muted-foreground">
           You&apos;re on the list. In the meantime, you can jump straight into the app.
         </p>
