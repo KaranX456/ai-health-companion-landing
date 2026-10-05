@@ -17,7 +17,7 @@ export function OpenAppButton({
     <a
       href={APP_URL}
       className={cn(
-        "group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-brand font-semibold text-primary-foreground shadow-soft transition-all duration-300 hover:shadow-lift hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "group inline-flex items-center justify-center gap-2 rounded-full bg-brand font-semibold text-primary-foreground shadow-soft transition-all duration-300 hover:shadow-lift hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         size === "lg" ? "px-7 py-3.5 text-base" : "px-5 py-2.5 text-sm",
         className,
       )}

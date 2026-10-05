@@ -25,10 +25,10 @@ export function Nav() {
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5 sm:px-8">
         <a href="#top" className="flex items-center gap-2.5">
-          <span className="flex size-9 items-center justify-center rounded-xl bg-gradient-brand text-primary-foreground shadow-soft">
+          <span className="flex size-9 items-center justify-center rounded-xl bg-brand text-primary-foreground shadow-soft">
             <Activity className="size-4.5" />
           </span>
-          <span className="font-display text-[0.98rem] font-semibold tracking-tight text-ink sm:text-base">
+          <span className="font-sans text-[0.98rem] font-semibold tracking-normal text-ink sm:text-base">
             AI Health Companion
           </span>
         </a>

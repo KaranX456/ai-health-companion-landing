@@ -26,6 +26,8 @@ import { SignupForm } from "@/components/landing/SignupForm";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "AI Health Companion — Symptom tracking with doctor-reviewed guidance" },
       {
         name: "description",
@@ -159,14 +161,6 @@ function Landing() {
 
       {/* HERO */}
       <section className="relative overflow-hidden bg-hero-aura pt-32 pb-24 sm:pt-40 sm:pb-32">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-32 -left-24 size-96 rounded-full bg-brand/25 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute top-24 -right-24 size-[26rem] rounded-full bg-accent/60 blur-3xl"
-        />
         <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
           <Reveal className="mx-auto max-w-3xl text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground backdrop-blur">
@@ -176,7 +170,7 @@ function Landing() {
             <h1 className="mt-7 font-display text-[2.7rem] leading-[1.03] font-semibold text-ink sm:text-6xl lg:text-[4.25rem]">
               Organized symptoms.
               <br />
-              <span className="text-gradient-brand">Evidence-backed guidance.</span>
+              <span className="text-brand">Evidence-backed guidance.</span>
               <br />
               Always reviewed by a real clinician.
             </h1>
@@ -206,7 +200,7 @@ function Landing() {
       <section className="border-y border-border bg-surface py-20 sm:py-24">
         <div className="mx-auto max-w-3xl px-5 text-center sm:px-8">
           <Reveal>
-            <h2 className="font-display text-3xl font-semibold text-ink sm:text-4xl">
+            <h2 className="font-sans text-3xl font-semibold text-ink sm:text-4xl">
               When something feels off, the internet is a bad first stop
             </h2>
             <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
@@ -227,7 +221,7 @@ function Landing() {
             <span className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
               How it works
             </span>
-            <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-4xl">
+            <h2 className="mt-4 font-sans text-3xl font-semibold text-ink sm:text-4xl">
               Three steps, and a human at the end of every one
             </h2>
           </Reveal>
@@ -240,15 +234,15 @@ function Landing() {
             {steps.map((step, index) => (
               <Reveal as="li" key={step.title} delay={index * 110} className="relative">
                 <div className="flex flex-col gap-5 rounded-3xl border border-border bg-surface p-6 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift sm:flex-row sm:p-8">
-                  <div className="relative z-10 flex size-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-brand text-primary-foreground shadow-soft">
+                  <div className="relative z-10 flex size-14 shrink-0 items-center justify-center rounded-2xl bg-brand text-primary-foreground shadow-soft">
                     <step.icon className="size-6" />
                   </div>
                   <div>
                     <div className="flex items-baseline gap-3">
-                      <span className="font-display text-sm font-semibold text-brand">
+                      <span className="font-sans text-sm font-semibold text-brand">
                         Step {index + 1}
                       </span>
-                      <h3 className="font-display text-xl font-semibold text-ink sm:text-2xl">
+                      <h3 className="font-sans text-xl font-semibold text-ink sm:text-2xl">
                         {step.title}
                       </h3>
                     </div>
@@ -270,7 +264,7 @@ function Landing() {
             <span className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
               What&apos;s inside
             </span>
-            <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-4xl">
+            <h2 className="mt-4 font-sans text-3xl font-semibold text-ink sm:text-4xl">
               Built for both sides of the conversation
             </h2>
           </Reveal>
@@ -285,7 +279,7 @@ function Landing() {
                   <span className="flex size-9 items-center justify-center rounded-xl bg-brand-soft text-brand">
                     <column.icon className="size-4.5" />
                   </span>
-                  <h3 className="font-display text-lg font-semibold text-ink">{column.label}</h3>
+                  <h3 className="font-sans text-lg font-semibold text-ink">{column.label}</h3>
                 </Reveal>
                 <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                   {column.items.map((item, index) => (
@@ -296,7 +290,7 @@ function Landing() {
                       className="group h-full rounded-2xl border border-border bg-background p-5 transition-all duration-300 hover:-translate-y-1 hover:border-brand/40 hover:shadow-lift"
                     >
                       <item.icon className="size-5 text-brand transition-transform duration-300 group-hover:scale-110" />
-                      <h4 className="mt-3.5 font-display text-base font-semibold text-ink">
+                      <h4 className="mt-3.5 font-sans text-base font-semibold text-ink">
                         {item.title}
                       </h4>
                       <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
@@ -318,7 +312,7 @@ function Landing() {
             <span className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
               Trust &amp; safety
             </span>
-            <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-4xl">
+            <h2 className="mt-4 font-sans text-3xl font-semibold text-ink sm:text-4xl">
               Careful by design, not by disclaimer
             </h2>
           </Reveal>
@@ -351,10 +345,10 @@ function Landing() {
                 delay={index * 90}
                 className="rounded-3xl border border-border bg-surface p-6 shadow-soft sm:p-7"
               >
-                <span className="flex size-10 items-center justify-center rounded-xl bg-brand-soft text-brand">
+                <span className="flex size-10 items-center justify-center rounded-xl bg-brand-soft text-accent-attention">
                   <item.icon className="size-5" />
                 </span>
-                <h3 className="mt-4 font-display text-lg font-semibold text-ink">{item.title}</h3>
+                <h3 className="mt-4 font-sans text-lg font-semibold text-ink">{item.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
               </Reveal>
             ))}
@@ -366,7 +360,7 @@ function Landing() {
       <section id="get-started" className="border-t border-border bg-hero-aura py-24 sm:py-32">
         <div className="mx-auto grid max-w-5xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2">
           <Reveal>
-            <h2 className="font-display text-3xl font-semibold text-ink sm:text-5xl">
+            <h2 className="font-sans text-3xl font-semibold text-ink sm:text-5xl">
               Try it today
             </h2>
             <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
@@ -388,10 +382,10 @@ function Landing() {
         <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 sm:px-8 md:flex-row md:items-end md:justify-between">
           <div>
             <div className="flex items-center gap-2.5">
-              <span className="flex size-8 items-center justify-center rounded-lg bg-gradient-brand text-primary-foreground">
+              <span className="flex size-8 items-center justify-center rounded-lg bg-brand text-primary-foreground">
                 <Activity className="size-4" />
               </span>
-              <span className="font-display text-base font-semibold text-ink">
+              <span className="font-sans text-base font-semibold text-ink">
                 AI Health Companion
               </span>
             </div>

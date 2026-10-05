@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Visual system
+- Define shared identity colors and fonts in global semantic tokens; reserve the display-font utility for the landing hero H1 so other text stays consistent with the sibling apps.
