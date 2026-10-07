@@ -138,7 +138,7 @@ function PulseLine() {
       viewBox="0 0 800 200"
       fill="none"
       aria-hidden="true"
-      className="w-full max-w-3xl text-brand"
+      className="w-full max-w-3xl text-accent-attention"
     >
       <path
         d="M0 100h180l24-46 26 92 30-124 34 158 26-80h60l20-30 22 60 24-24h334"
@@ -164,13 +164,13 @@ function Landing() {
         <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
           <Reveal className="mx-auto max-w-3xl text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground backdrop-blur">
-              <HeartPulse className="size-3.5 text-brand" />
+              <span className="size-2 rounded-full bg-accent-attention" />
               Decision support, not diagnosis
             </span>
             <h1 className="mt-7 font-display text-[2.7rem] leading-[1.03] font-semibold text-ink sm:text-6xl lg:text-[4.25rem]">
               Organized symptoms.
               <br />
-              <span className="text-brand">Evidence-backed guidance.</span>
+              <span className="text-accent-attention">Evidence-backed guidance.</span>
               <br />
               Always reviewed by a real clinician.
             </h1>
