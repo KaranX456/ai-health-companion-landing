@@ -7,7 +7,6 @@ import {
   Camera,
   ClipboardList,
   FileText,
-  HeartPulse,
   ListOrdered,
   MessagesSquare,
   Pill,
