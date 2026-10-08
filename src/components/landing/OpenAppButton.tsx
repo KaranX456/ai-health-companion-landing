@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-export const APP_URL = "https://carepath-patient.lovable.app";
+export const APP_URL = "https://wellness-essence-app.lovable.app";
 
 export function OpenAppButton({
   className,
