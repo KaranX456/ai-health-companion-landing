@@ -7,7 +7,7 @@ CONNECT TO THIS EXISTING SUPABASE PROJECT (same backend as the rest of the produ
 - Publishable/anon key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhtcmRzcWdieW95c21mZGhtbGt3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY5MzY1NzcsImV4cCI6MjEwMjUxMjU3N30.5zmw0C3wd6vgqYvxydf75ywjvS7X_6VnQFOv2Pk_ouc
 Install @supabase/supabase-js and wire up a typed client. There is exactly one table this site touches: `landing_page_signups` (columns: email text, full_name text nullable, interest text default 'patient' check in ('patient','clinician','other')). RLS only permits INSERT for the anon role — no reads are possible or needed from this site, so never attempt to query/select from this table, only insert.
 
-PRIMARY CTA: A prominent "Open the app" button that links directly (same tab, standard <a> navigation) to https://carepath-patient.lovable.app — this must appear in the hero section AND in a sticky/repeated location (nav bar and/or final CTA section) so it's always reachable while scrolling.
+PRIMARY CTA: A prominent "Open the app" button that links directly (same tab, standard <a> navigation) to https://wellness-essence-app.lovable.app — this must appear in the hero section AND in a sticky/repeated location (nav bar and/or final CTA section) so it's always reachable while scrolling.
 
 CONTENT — build a full single-page scrolling site with these sections, using the real product substance below (don't invent unrelated features):
 
