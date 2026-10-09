@@ -17,31 +17,31 @@ export function Nav() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 ",
+        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
         scrolled
           ? "border-b border-border/70 bg-background/80 backdrop-blur-xl"
           : "border-b border-transparent",
       )}
     >
-      <nav className="mx-auto grid max-w-5xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-5 py-3.5">
-        <a href="#top" className="flex min-w-0 items-center gap-2.5">
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-brand text-primary-foreground">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5 sm:px-8">
+        <a href="#top" className="flex items-center gap-2.5">
+          <span className="flex size-9 items-center justify-center rounded-xl bg-brand text-primary-foreground shadow-soft">
             <Activity className="size-4.5" />
           </span>
-          <span className="min-w-0 text-sm font-medium text-ink sm:text-base">
+          <span className="font-sans text-[0.98rem] font-semibold tracking-normal text-ink sm:text-base">
             AI Health Companion
           </span>
         </a>
-        <div className="flex shrink-0 items-center gap-6">
+        <div className="flex items-center gap-5">
           <a
             href="#how-it-works"
-            className="hidden text-sm font-medium text-muted-foreground hover:text-foreground md:inline"
+            className="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground md:inline"
           >
             How it works
           </a>
           <a
             href="#trust"
-            className="hidden text-sm font-medium text-muted-foreground hover:text-foreground md:inline"
+            className="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground md:inline"
           >
             Trust &amp; safety
           </a>
