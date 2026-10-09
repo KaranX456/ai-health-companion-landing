@@ -19,8 +19,8 @@
  */
 
 @theme inline {
-  --font-display: "Fraunces", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-soft: var(--brand-soft);
@@ -169,12 +169,6 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  h1,
-  h2,
-  h3 {
-    font-family: var(--font-sans);
-    letter-spacing: 0;
-  }
 }
 
 @utility bg-hero-aura {
@@ -210,4 +204,61 @@
   html {
     scroll-behavior: auto;
   }
+}
+
+/* Calm landing presentation; embedded controls keep their existing behavior. */
+.landing-page {
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0;
+}
+.landing-page :is(h1, h2, h3) {
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+.landing-page :is(section[id], #top) {
+  scroll-margin-top: 6rem;
+}
+.landing-page :is(a, button, input):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 4px;
+}
+.landing-page :is(a, button, input, header, a svg) {
+  transition: none;
+}
+.landing-page a {
+  box-shadow: none;
+}
+.landing-page a:hover svg {
+  transform: none;
+}
+.signup-presentation :is(form, form button, div) {
+  box-shadow: none;
+}
+.signup-presentation > :is(form, div) {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+}
+.signup-presentation :is(label > span, legend) {
+  text-transform: none;
+  letter-spacing: 0;
+}
+.signup-presentation form > p {
+  text-align: left;
+}
+.pulse-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: pulse-draw 1.6s ease-out both;
+}
+@keyframes pulse-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pulse-draw { animation: none; }
 }

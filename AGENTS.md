@@ -10,4 +10,5 @@
 <!-- LOVABLE:END -->
 
 ## Visual system
-- Define shared identity colors and fonts in global semantic tokens; reserve the display-font utility for the landing hero H1 so other text stays consistent with the sibling apps.
+- Define shared identity colors and fonts in global semantic tokens; reserve the display-font utility for the landing hero H1 so typography remains centrally controlled.
+- Keep landing-only presentation overrides scoped to `.landing-page` and `.signup-presentation`; embedded app-link and signup modules stay unchanged while the public page is restyled.
