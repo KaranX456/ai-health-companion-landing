@@ -19,8 +19,8 @@
  */
 
 @theme inline {
-  --font-display: "Fraunces", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-soft: var(--brand-soft);
@@ -170,9 +170,9 @@
     -webkit-font-smoothing: antialiased;
   }
   h1,
-  h2,
-  h3 {
-    font-family: var(--font-sans);
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
     letter-spacing: 0;
   }
 }
@@ -210,4 +210,118 @@
   html {
     scroll-behavior: auto;
   }
+}
+
+/* Mockup effects are semantic tokens; original identity colors stay intact. */
+:root {
+  --page-wash: radial-gradient(60% 38% at 80% 6%, oklch(0.915 0.029 183), transparent 72%), radial-gradient(45% 28% at 6% 2%, oklch(0.94 0.019 225), transparent 72%);
+  --gloss-overlay: linear-gradient(180deg, oklch(1 0 0 / .22), transparent 52%, oklch(0 0 0 / .18));
+  --gloss-shadow: inset 0 1px 0 oklch(1 0 0 / .32), 0 16px 30px -12px oklch(0.318 0.025 241 / .7);
+  --sheen: linear-gradient(100deg, transparent, oklch(1 0 0 / .4), transparent);
+  --light-card: linear-gradient(180deg, var(--surface), oklch(0.98 0.007 196));
+  --light-card-shadow: inset 0 1px 0 var(--surface), 0 0 0 1px oklch(0.902 0.016 196), 0 34px 64px -30px oklch(0.24 0.026 235 / .5), 0 10px 20px -12px oklch(0.24 0.026 235 / .2);
+  --dark-card: linear-gradient(155deg, oklch(0.433 0.037 237), oklch(0.318 0.025 241), oklch(0.24 0.026 235));
+  --dark-card-shadow: inset 0 1px 0 oklch(1 0 0 / .18), 0 0 70px -8px oklch(0.797 0.084 183 / .3), 0 24px 40px -24px oklch(0.24 0.026 235 / .7);
+  --hero-ink-gradient: linear-gradient(180deg, oklch(0.192 0.024 233), oklch(0.439 0.04 236));
+  --product-dot: oklch(0.6 0.04 190 / .24);
+  --product-glow: radial-gradient(ellipse, oklch(0.797 0.084 183 / .45), transparent 68%);
+  --light-ink: oklch(0.97 0.008 190);
+  --light-muted: oklch(0.805 0.022 211);
+  --step-rule: linear-gradient(90deg, oklch(0.24 0.026 235), var(--accent-attention) 45%, transparent);
+  --toggle-active: linear-gradient(180deg, oklch(0.418 0.03 239), oklch(0.318 0.025 241));
+  --trust-background: radial-gradient(70% 95% at 12% 0%, oklch(0.452 0.035 241), transparent 65%), radial-gradient(50% 75% at 96% 100%, oklch(0.797 0.084 183 / .26), transparent 70%), linear-gradient(180deg, oklch(0.352 0.031 241), oklch(0.24 0.026 235));
+  --pulse-glow: drop-shadow(0 0 7px oklch(0.42 0.13 28 / .5));
+}
+.landing-page { background: var(--page-wash), var(--background); overflow: clip; }
+.page-container { width: 100%; max-width: 1168px; margin-inline: auto; padding-inline: 24px; }
+.page-section { padding-block: 110px; scroll-margin-top: 80px; }
+.landing-page h2 { font-size: 44px; line-height: 1.12; }
+.hero-section { padding-top: 160px; padding-bottom: 55px; }
+.hero-grid { display: grid; grid-template-columns: 1.12fr 1fr; gap: 48px; align-items: center; }
+.hero-copy h1 { font-size: clamp(44px, 5.4vw, 78px); line-height: 1.04; background: var(--hero-ink-gradient); background-clip: text; color: transparent; }
+.hero-description { max-width: 470px; margin-top: 28px; font-size: 19px; line-height: 1.65; color: var(--muted-foreground); }
+.hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; margin-top: 32px; }
+.text-link { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 5px; font-weight: 500; }
+.brand-logo { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-weight: 600; color: var(--ink); }
+.landing-page a:focus-visible, .landing-page button:focus-visible, .landing-page textarea:focus-visible { outline: 2px solid var(--ring); outline-offset: 4px; }
+.landing-page a[href="https://wellness-essence-app.lovable.app"], .demo-primary, .signup-card button[type="submit"] { position: relative; overflow: hidden; isolation: isolate; background-color: var(--brand); background-image: var(--gloss-overlay); box-shadow: var(--gloss-shadow); border-radius: 999px; min-height: 44px; color: var(--brand-foreground); }
+.landing-page a[href="https://wellness-essence-app.lovable.app"]::after, .demo-primary::after, .signup-card button[type="submit"]::after { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--sheen); transform: translateX(-130%) skewX(-20deg); pointer-events: none; }
+.landing-page a[href="https://wellness-essence-app.lovable.app"]:hover::after, .demo-primary:hover::after, .signup-card button[type="submit"]:hover::after { animation: button-sheen .6s ease; }
+@keyframes button-sheen { to { transform: translateX(130%) skewX(-20deg); } }
+.card { background: var(--light-card); box-shadow: var(--light-card-shadow); border-radius: 8px; padding: 28px; }
+.card-dark { background: var(--dark-card); box-shadow: var(--dark-card-shadow); border-radius: 8px; color: var(--light-ink); padding: 26px; }
+.hero-product { position: relative; padding-top: 20px; }
+.product-backdrop { position: absolute; inset: -70px -28px; pointer-events: none; }
+.product-backdrop::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, var(--product-dot) 1px, transparent 1.5px) 0 0 / 15px 15px; mask-image: radial-gradient(ellipse, var(--surface) 30%, transparent 70%); }
+.product-backdrop::after { content: ""; position: absolute; inset: 20%; background: var(--product-glow); filter: blur(28px); }
+.patient-today { position: relative; margin-right: 32px; padding-bottom: 46px; }
+.product-heading { display: flex; align-items: center; gap: 9px; font-weight: 600; font-size: 14px; }
+.status-dot, .evidence-dot { margin-left: auto; width: 7px; height: 7px; border-radius: 50%; background: var(--brand); }
+.evidence-dot { background: var(--light-muted); }
+.dose-mark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--brand-soft); color: var(--brand); }
+.demo-primary { padding-inline: 20px; font-weight: 600; }
+.severity { display: flex; gap: 4px; flex-shrink: 0; }
+.severity span { width: 6px; height: 18px; border-radius: 2px; background: var(--border); }
+.severity .filled { background: var(--brand); }
+.evidence-card { position: relative; margin-top: -26px; margin-left: 56px; }
+.evidence-rows { margin-top: 20px; }
+.evidence-rows > div { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 13px; font-size: 13px; border-bottom: 1px solid color-mix(in oklab, var(--light-ink) 12%, transparent); }
+.evidence-pill { font-size: 10px; padding: 5px 9px; border: 1px solid var(--light-muted); border-radius: 999px; white-space: nowrap; }
+.evidence-pill.established { background: var(--surface); color: var(--ink); border-color: var(--surface); }
+.evidence-pill.contested { border-style: dashed; }
+.evidence-footer { margin-top: 20px; display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 12px; color: var(--light-muted); }
+.demo-light { background: var(--surface); color: var(--ink); border-radius: 999px; min-height: 44px; padding-inline: 20px; }
+.product-caption { position: relative; margin-top: 20px; text-align: center; font-size: 12px; color: var(--muted-foreground); }
+.pulse-band { height: 130px; display: flex; align-items: center; overflow: hidden; }
+.pulse-line { height: 160px; filter: var(--pulse-glow); }
+.pulse-line path:first-child { stroke-dasharray: 1300; stroke-dashoffset: 1300; animation: pulse-draw 1.6s ease-out forwards; }
+@keyframes pulse-draw { to { stroke-dashoffset: 0; } }
+.steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 48px; }
+.step-column { border-top: 2px solid; border-image: var(--step-rule) 1; padding-top: 25px; }
+.step-number { font-family: var(--font-display); font-size: 60px; line-height: 1; color: var(--ink); }
+.features-section { padding-top: 70px; }
+.feature-header { display: flex; justify-content: space-between; align-items: center; gap: 32px; }
+.audience-toggle { display: flex; flex-shrink: 0; padding: 5px; border-radius: 999px; background: var(--brand-soft); box-shadow: inset 0 2px 5px color-mix(in oklab, var(--ink) 12%, transparent), inset 0 -1px 0 var(--surface); }
+.audience-button { border-radius: 999px; min-height: 44px; padding-inline: 20px; color: var(--muted-foreground); }
+.audience-button.active { background: var(--toggle-active); color: var(--brand-foreground); box-shadow: inset 0 1px 0 color-mix(in oklab, var(--surface) 30%, transparent), 0 3px 8px color-mix(in oklab, var(--ink) 20%, transparent); }
+.feature-content { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; margin-top: 52px; }
+.feature-item { padding-block: 21px; border-bottom: 1px solid var(--border); }
+.feature-item:first-child { padding-top: 0; }
+.feature-illustration { min-height: 370px; padding: 32px; }
+.timeline-rows { margin-block: 30px; }
+.timeline-row { display: grid; grid-template-columns: 42px 1fr; gap: 16px; margin-bottom: 25px; }
+.timeline-bar { display: block; margin-top: 12px; height: 5px; border-radius: 999px; background: var(--brand); }
+.timeline-bar-0 { width: 42%; }.timeline-bar-1 { width: 26%; }.timeline-bar-2 { width: 60%; }
+.safety-flag { display: flex; gap: 12px; border: 2px solid var(--accent-attention); border-radius: 6px; padding: 18px; color: var(--accent-attention); }
+.draft-chip { font-size: 11px; background: var(--brand-soft); color: var(--brand); border-radius: 999px; padding: 5px 10px; }
+.demo-outline { min-height: 44px; border-radius: 999px; padding-inline: 22px; }
+.soap-input { width: 100%; min-height: 112px; padding: 12px; margin-block: 16px; color: var(--ink); background: var(--background); border: 1px solid var(--border); border-radius: 4px; }
+.trust-band { background: var(--trust-background); color: var(--light-ink); }
+.trust-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 48px; margin-top: 52px; }
+.trust-grid h3 { font-size: 26px; font-weight: 500; line-height: 1.2; }
+.trust-grid p { margin-top: 18px; line-height: 1.7; color: var(--light-muted); }
+.cta-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 90px; }
+.signup-card > form, .signup-card > div { background: var(--light-card); box-shadow: var(--light-card-shadow); border: 0; border-radius: 8px; padding: 32px; }
+.signup-card label > span, .signup-card legend { text-transform: none; letter-spacing: 0; font-size: 13px; }
+.signup-card input { border-radius: 6px; min-height: 44px; }
+.signup-card fieldset button { min-height: 44px; padding-inline: 10px; }
+.landing-footer { border-top: 1px solid var(--border); padding-block: 30px; }
+.footer-content { display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+.footer-content p { max-width: 440px; font-size: 13px; line-height: 1.6; color: var(--muted-foreground); }
+@media(max-width: 1000px) {
+ .hero-grid { gap: 28px; } .hero-copy h1 { font-size: 56px; } .evidence-card { margin-left: 24px; } .patient-today { margin-right: 16px; } .card, .card-dark { padding: 22px; } .patient-today { padding-bottom: 44px; }
+ .feature-header { align-items: flex-start; flex-direction: column; } .feature-content, .cta-grid { gap: 48px; } .steps-grid, .trust-grid { gap: 30px; }
+}
+@media(max-width: 767px) {
+ .page-section { padding-block: 72px; } .hero-section { padding-top: 125px; padding-bottom: 35px; } .hero-grid, .feature-content, .cta-grid { grid-template-columns: 1fr; gap: 44px; }
+ .hero-copy h1 { font-size: 44px; } .hero-description { font-size: 18px; } .hero-product { max-width: 470px; margin-inline: auto; } .landing-page h2 { font-size: 36px; }
+ .steps-grid, .trust-grid { grid-template-columns: 1fr; gap: 38px; } .step-number { font-size: 48px; } .steps-grid { margin-top: 36px; } .feature-content { margin-top: 38px; }
+ .evidence-card { margin-left: 26px; }.evidence-rows > div { font-size: 12px; gap: 8px; }.evidence-pill { font-size: 9px; padding-inline: 7px; }.patient-today { margin-right: 20px; }
+ .feature-illustration { padding: 25px; }.signup-card > form, .signup-card > div { padding: 24px; }.footer-content { flex-direction: column; align-items: flex-start; gap: 14px; }.pulse-band { height: 90px; }.pulse-line { height: 110px; }
+ .nav-brand-name { max-width: 150px; font-size: 14px; line-height: 1.15; }.landing-page header nav > div { gap: 12px; }.landing-page header a[href="https://wellness-essence-app.lovable.app"] { padding-inline: 14px; font-size: 12px; gap: 5px; }
+}
+@media(prefers-reduced-motion: reduce) {
+ .pulse-line path:first-child { animation: none; stroke-dashoffset: 0; }
+ .landing-page a::after, .landing-page button::after { animation: none !important; }
+ .landing-page * { transition-duration: 0s !important; }
 }
