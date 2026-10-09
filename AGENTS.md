@@ -10,4 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Visual system
-- Define shared identity colors and fonts in global semantic tokens; reserve the display-font utility for the landing hero H1 so other text stays consistent with the sibling apps.
+- Define shared identity colors and fonts in global semantic tokens; apply display typography to H1/H2 and body typography elsewhere to keep the approved landing hierarchy consistent.
+
+- Keep illustrative product interactions in the landing page client state, separate from real signup and app navigation, so examples never write patient records.
+- Scope landing effects and signup presentation overrides through the landing wrapper so preserved form logic and shared controls remain unchanged.
