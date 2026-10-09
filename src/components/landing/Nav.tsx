@@ -23,27 +23,27 @@ export function Nav() {
           : "border-b border-transparent",
       )}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5 sm:px-8">
-        <a href="#top" className="flex items-center gap-2.5">
-          <span className="flex size-9 items-center justify-center rounded-xl bg-brand text-primary-foreground shadow-soft">
-            <Activity className="size-4.5" />
+      <nav className="page-container flex min-h-20 items-center justify-between gap-4 py-3.5">
+        <a href="#top" className="brand-logo">
+          <span className="flex size-7 items-center justify-center text-brand">
+            <Activity className="size-6" />
           </span>
-          <span className="font-sans text-[0.98rem] font-semibold tracking-normal text-ink sm:text-base">
+          <span className="nav-brand-name text-base font-semibold text-ink">
             AI Health Companion
           </span>
         </a>
         <div className="flex items-center gap-5">
           <a
             href="#how-it-works"
-            className="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground md:inline"
+            className="hidden min-h-11 items-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground md:inline-flex"
           >
             How it works
           </a>
           <a
             href="#trust"
-            className="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground md:inline"
+            className="hidden min-h-11 items-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground md:inline-flex"
           >
-            Trust &amp; safety
+            Trust and safety
           </a>
           <OpenAppButton />
         </div>

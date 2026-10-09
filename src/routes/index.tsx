@@ -1,26 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  Activity,
-  AlertTriangle,
-  BellRing,
-  Brain,
-  Camera,
-  ClipboardList,
-  FileText,
-  ListOrdered,
-  MessagesSquare,
-  Pill,
-  Send,
-  ShieldCheck,
-  Stethoscope,
-  Sun,
-  UserRound,
-} from "lucide-react";
+import { Activity, ArrowRight, Check, AlertTriangle } from "lucide-react";
+import { useState } from "react";
 
 import { Nav } from "@/components/landing/Nav";
 import { OpenAppButton } from "@/components/landing/OpenAppButton";
 import { Reveal } from "@/components/landing/Reveal";
 import { SignupForm } from "@/components/landing/SignupForm";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -47,88 +33,20 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-const patientFeatures = [
-  {
-    icon: ClipboardList,
-    title: "Symptom Organizer",
-    body: "Log what you feel over time and walk into your appointment with a clear pre-visit summary.",
-  },
-  {
-    icon: BellRing,
-    title: "Medication reminders",
-    body: "One-tap confirmation straight from the reminder — no login required to mark a dose taken.",
-  },
-  {
-    icon: Camera,
-    title: "Photo-based triage guidance",
-    body: "Never names a condition. Only tells you \u201cworth a doctor's look\u201d or \u201ccommon, monitor.\u201d",
-  },
-  {
-    icon: Sun,
-    title: "Daily wellbeing check-ins",
-    body: "A short check-in each day, with supportive crisis resources surfaced when they matter.",
-  },
-  {
-    icon: MessagesSquare,
-    title: "Community experiences",
-    body: "Relevant stories from health forums, always clearly labeled as personal anecdotes.",
-  },
-  {
-    icon: Send,
-    title: "One-tap doctor hand-off",
-    body: "Securely send your organized history to your linked physician whenever you're ready.",
-  },
-];
-
-const clinicianFeatures = [
-  {
-    icon: UserRound,
-    title: "Consolidated patient dossier",
-    body: "History, medications, photos and check-ins gathered into one reviewable record.",
-  },
-  {
-    icon: ListOrdered,
-    title: "Ranked differential diagnosis",
-    body: "Expandable evidence trail behind every possibility — non-diagnostic by default until reviewed.",
-  },
-  {
-    icon: AlertTriangle,
-    title: "Drug interaction & allergy flags",
-    body: "Safety checks cross-referenced against drug-safety databases before anything is prescribed.",
-  },
-  {
-    icon: FileText,
-    title: "AI-drafted SOAP notes",
-    body: "A structured first draft you edit and finalize — the clinician always signs off.",
-  },
-  {
-    icon: Stethoscope,
-    title: "Assembled treatment options",
-    body: "Surfaced only after you confirm a diagnosis, never before.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Evidence before action",
-    body: "The interface requires reviewing the supporting evidence before an assessment can be acted on.",
-  },
-];
-
 const steps = [
-  {
-    icon: ClipboardList,
-    title: "Track & share",
-    body: "Patients log symptoms, medications and photos over time, and can optionally browse relevant community experiences from health forums — always clearly labeled as personal anecdotes, never medical evidence.",
-  },
-  {
-    icon: Brain,
-    title: "Evidence-based scoring",
-    body: "A structured clinical engine cross-references medical history, drug-safety databases and medical literature to build a ranked list of possibilities — never a single flat diagnosis, always shown with its supporting evidence and a confidence level: well-established, moderate, or rare-or-contested.",
-  },
-  {
-    icon: Stethoscope,
-    title: "Doctor reviews & confirms",
-    body: "A linked physician reviews the evidence trail, confirms or adjusts the assessment, and only then are treatment options and next steps shared. Always doctor-mediated, never automatic.",
-  },
+  { title: "Track", body: "Log symptoms, medications and photos as they happen." },
+  { title: "Score", body: "Your history is checked against drug-safety data and medical literature, then ranked with its evidence and a confidence level." },
+  { title: "Review", body: "Your linked doctor confirms before any treatment step is shared." },
+];
+const patientFeatures = [
+  { title: "Symptom organizer", body: "A clear pre-visit summary of what you have logged." },
+  { title: "Medication reminders", body: "Confirm a dose in one tap, no login needed." },
+  { title: "Photo guidance", body: "Never names a condition. It says worth a doctor's look, or common, monitor." },
+];
+const clinicianFeatures = [
+  { title: "Patient dossier", body: "History, medications, photos and check-ins in one record." },
+  { title: "Ranked differential", body: "Every possibility comes with an expandable evidence trail." },
+  { title: "Safety flags and SOAP drafts", body: "Interaction and allergy checks, plus notes drafted for you to edit. Treatment options appear only after you confirm a diagnosis." },
 ];
 
 function PulseLine() {
@@ -137,7 +55,7 @@ function PulseLine() {
       viewBox="0 0 800 200"
       fill="none"
       aria-hidden="true"
-      className="w-full max-w-3xl text-accent-attention"
+      className="pulse-line w-full text-accent-attention"
     >
       <path
         d="M0 100h180l24-46 26 92 30-124 34 158 26-80h60l20-30 22 60 24-24h334"
@@ -153,251 +71,117 @@ function PulseLine() {
   );
 }
 
-function Landing() {
+function HeroCards() {
+  const [taken, setTaken] = useState(false);
+  const [confirmed, setConfirmed] = useState(false);
   return (
-    <div id="top" className="min-h-screen bg-background text-foreground">
+    <div className="hero-product">
+      <div className="product-backdrop" aria-hidden="true" />
+      <div className="card patient-today">
+        <div className="product-heading"><Activity className="size-4 text-brand" /><span>Patient app · Today</span><span className="status-dot" /></div>
+        <div className="mt-7 flex items-start justify-between gap-4">
+          <div><h3 className="text-lg font-semibold text-ink">Morning dose</h3><p className="mt-1 text-sm text-muted-foreground">Confirm once you have taken it.</p></div>
+          <span className="dose-mark" aria-hidden="true"><Check className="size-4" /></span>
+        </div>
+        <Button className="demo-primary mt-5" onClick={() => setTaken(true)}><Check className="size-4" />{taken ? "Dose confirmed" : "Yes, I took it"}</Button>
+        <div className="mt-6 border-t border-border pt-5">
+          <h3 className="text-base font-medium text-ink">Headache behind the eyes</h3>
+          <div className="mt-2 flex items-center justify-between gap-3"><p className="text-sm text-muted-foreground">Logged this morning</p><div className="severity" role="img" aria-label="Severity 3 of 5">{[0,1,2,3,4].map(i => <span key={i} className={i < 3 ? "filled" : ""} />)}</div></div>
+        </div>
+      </div>
+      <div className="card-dark evidence-card">
+        <div className="product-heading"><span>Evidence trail · Clinician view</span><span className="evidence-dot" /></div>
+        <div className="evidence-rows">
+          <div><span>Tension-type headache</span><span className="evidence-pill established">Well-established</span></div>
+          <div><span>Migraine</span><span className="evidence-pill">Moderate</span></div>
+          <div><span>Cluster headache</span><span className="evidence-pill contested">Rare or contested</span></div>
+        </div>
+        <div className="evidence-footer"><span>{confirmed ? "Example review confirmed" : "Awaiting your review"}</span><Button variant="secondary" className="demo-light" onClick={() => setConfirmed(true)}>{confirmed ? "Confirmed" : "Confirm"}</Button></div>
+      </div>
+      <p className="product-caption">Illustrative example, not real patient data.</p>
+    </div>
+  );
+}
+
+function PatientIllustration() {
+  const [sent, setSent] = useState(false);
+  return (
+    <div className="card feature-illustration">
+      <div className="product-heading"><span>Symptom timeline</span><Activity className="size-4 text-brand" /></div>
+      <div className="timeline-rows">{[
+        ["Mon", "Headache behind the eyes"], ["Wed", "Light sensitivity"], ["Fri", "Headache, after screens"],
+      ].map(([day, symptom], i) => <div className="timeline-row" key={day}><span className="text-sm text-muted-foreground">{day}</span><div><p className="text-base font-medium text-ink">{symptom}</p><span className={`timeline-bar timeline-bar-${i}`} /></div></div>)}</div>
+      <div className="border-t border-border pt-5"><p className="mb-4 text-sm text-muted-foreground">{sent ? "Example summary sent" : "Pre-visit summary ready"}</p><Button className="demo-primary" onClick={() => setSent(true)}>{sent ? "Sent to my doctor" : "Send to my doctor"}<ArrowRight className="size-4" /></Button></div>
+    </div>
+  );
+}
+
+function ClinicianIllustration() {
+  const [editing, setEditing] = useState(false);
+  const [finalized, setFinalized] = useState(false);
+  const [assessment, setAssessment] = useState("Assessment: working assessment drafted from the evidence trail. Edit, then finalize.");
+  return (
+    <div className="card feature-illustration">
+      <div className="safety-flag"><AlertTriangle className="size-5 shrink-0" /><div><h3 className="font-semibold">Safety flag</h3><p className="mt-2 text-sm leading-relaxed">Possible interaction between two active medications. Review before prescribing.</p></div></div>
+      <div className="mt-7 flex items-center justify-between"><h3 className="text-lg font-semibold text-ink">SOAP note</h3><span className="draft-chip">AI draft</span></div>
+      {editing ? <textarea aria-label="Edit SOAP assessment" className="soap-input" value={assessment} onChange={event => setAssessment(event.target.value)} /> : <p className="my-5 text-base leading-relaxed text-muted-foreground">{assessment}</p>}
+      <div className="flex gap-3"><Button className="demo-primary" onClick={() => { setFinalized(true); setEditing(false); }}>{finalized ? "Finalized" : "Finalize"}</Button><Button variant="outline" className="demo-outline" onClick={() => {setEditing(!editing); setFinalized(false);}}>{editing ? "Save edit" : "Edit"}</Button></div>
+    </div>
+  );
+}
+
+function Landing() {
+  const [audience, setAudience] = useState<"patients" | "clinicians">("patients");
+  const features = audience === "patients" ? patientFeatures : clinicianFeatures;
+  return (
+    <div id="top" className="landing-page min-h-screen text-foreground">
       <Nav />
-
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-hero-aura pt-32 pb-24 sm:pt-40 sm:pb-32">
-        <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
-          <Reveal className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground backdrop-blur">
-              <span className="size-2 rounded-full bg-accent-attention" />
-              Decision support, not diagnosis
-            </span>
-            <h1 className="mt-7 font-display text-[2.7rem] leading-[1.03] font-semibold text-ink sm:text-6xl lg:text-[4.25rem]">
-              Organized symptoms.
-              <br />
-              <span className="text-accent-attention">Evidence-backed guidance.</span>
-              <br />
-              Always reviewed by a real clinician.
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              AI Health Companion helps you track what you&apos;re experiencing and turns it into
-              structured, evidence-linked guidance. It doesn&apos;t replace your doctor — it&apos;s
-              non-diagnostic support that helps you and your clinician communicate better.
-            </p>
-            <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <OpenAppButton size="lg" />
-              <a
-                href="#how-it-works"
-                className="inline-flex items-center justify-center rounded-full border border-border bg-surface/70 px-7 py-3.5 text-base font-medium text-foreground backdrop-blur transition-colors hover:bg-surface"
-              >
-                See how it works
-              </a>
-            </div>
-          </Reveal>
-
-          <Reveal delay={140} className="mt-16 flex justify-center">
-            <PulseLine />
-          </Reveal>
-        </div>
-      </section>
-
-      {/* PROBLEM */}
-      <section className="border-y border-border bg-surface py-20 sm:py-24">
-        <div className="mx-auto max-w-3xl px-5 text-center sm:px-8">
-          <Reveal>
-            <h2 className="font-sans text-3xl font-semibold text-ink sm:text-4xl">
-              When something feels off, the internet is a bad first stop
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              A random search either spirals into overwhelming anxiety or shrugs you off with
-              &ldquo;it&apos;s probably nothing.&rdquo; Neither helps. And by the time you sit down
-              with a doctor, weeks of scattered symptoms are hard to recall, let alone explain.
-              There&apos;s no good way to organize what you&apos;re actually experiencing before
-              that visit.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* HOW IT WORKS */}
-      <section id="how-it-works" className="py-24 sm:py-32">
-        <div className="mx-auto max-w-5xl px-5 sm:px-8">
-          <Reveal className="max-w-2xl">
-            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
-              How it works
-            </span>
-            <h2 className="mt-4 font-sans text-3xl font-semibold text-ink sm:text-4xl">
-              Three steps, and a human at the end of every one
-            </h2>
-          </Reveal>
-
-          <ol className="relative mt-14 space-y-6">
-            <div
-              aria-hidden="true"
-              className="absolute top-8 bottom-8 left-[1.65rem] hidden w-px bg-gradient-to-b from-brand/60 via-brand/25 to-transparent sm:block"
-            />
-            {steps.map((step, index) => (
-              <Reveal as="li" key={step.title} delay={index * 110} className="relative">
-                <div className="flex flex-col gap-5 rounded-3xl border border-border bg-surface p-6 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift sm:flex-row sm:p-8">
-                  <div className="relative z-10 flex size-14 shrink-0 items-center justify-center rounded-2xl bg-brand text-primary-foreground shadow-soft">
-                    <step.icon className="size-6" />
-                  </div>
-                  <div>
-                    <div className="flex items-baseline gap-3">
-                      <span className="font-sans text-sm font-semibold text-brand">
-                        Step {index + 1}
-                      </span>
-                      <h3 className="font-sans text-xl font-semibold text-ink sm:text-2xl">
-                        {step.title}
-                      </h3>
-                    </div>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                      {step.body}
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* FEATURES */}
-      <section id="features" className="border-y border-border bg-surface py-24 sm:py-32">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
-          <Reveal className="max-w-2xl">
-            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
-              What&apos;s inside
-            </span>
-            <h2 className="mt-4 font-sans text-3xl font-semibold text-ink sm:text-4xl">
-              Built for both sides of the conversation
-            </h2>
-          </Reveal>
-
-          <div className="mt-14 grid gap-12 lg:grid-cols-2 lg:gap-10">
-            {[
-              { label: "For Patients", icon: UserRound, items: patientFeatures },
-              { label: "For Clinicians", icon: Stethoscope, items: clinicianFeatures },
-            ].map((column) => (
-              <div key={column.label}>
-                <Reveal className="flex items-center gap-3">
-                  <span className="flex size-9 items-center justify-center rounded-xl bg-brand-soft text-brand">
-                    <column.icon className="size-4.5" />
-                  </span>
-                  <h3 className="font-sans text-lg font-semibold text-ink">{column.label}</h3>
-                </Reveal>
-                <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                  {column.items.map((item, index) => (
-                    <Reveal
-                      as="li"
-                      key={item.title}
-                      delay={index * 70}
-                      className="group h-full rounded-2xl border border-border bg-background p-5 transition-all duration-300 hover:-translate-y-1 hover:border-brand/40 hover:shadow-lift"
-                    >
-                      <item.icon className="size-5 text-brand transition-transform duration-300 group-hover:scale-110" />
-                      <h4 className="mt-3.5 font-sans text-base font-semibold text-ink">
-                        {item.title}
-                      </h4>
-                      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                        {item.body}
-                      </p>
-                    </Reveal>
-                  ))}
-                </ul>
-              </div>
-            ))}
+      <main>
+        <section className="hero-section">
+          <div className="page-container hero-grid">
+            <Reveal className="hero-copy">
+              <h1>Organized symptoms.<br />Reviewed by a real clinician.</h1>
+              <p className="hero-description">Track what you feel, get evidence-linked guidance, and bring a clear record to your doctor.</p>
+              <div className="hero-actions"><OpenAppButton size="lg" /><a className="text-link" href="#how-it-works">See how it works</a></div>
+              <p className="mt-5 text-sm text-muted-foreground">Decision support, not diagnosis.</p>
+            </Reveal>
+            <Reveal delay={120}><HeroCards /></Reveal>
           </div>
-        </div>
-      </section>
-
-      {/* TRUST */}
-      <section id="trust" className="py-24 sm:py-32">
-        <div className="mx-auto max-w-5xl px-5 sm:px-8">
-          <Reveal className="max-w-2xl">
-            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
-              Trust &amp; safety
-            </span>
-            <h2 className="mt-4 font-sans text-3xl font-semibold text-ink sm:text-4xl">
-              Careful by design, not by disclaimer
-            </h2>
-          </Reveal>
-
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {[
-              {
-                icon: ShieldCheck,
-                title: "Guidance, never a diagnosis",
-                body: "Nothing here diagnoses you. The product is decision support for you and your clinician, and it says so at every step.",
-              },
-              {
-                icon: Activity,
-                title: "The disclosure gate",
-                body: "You only ever see a named condition when confidence is well-established, it's backed by real evidence, and the case is benign and monitorable. Otherwise you see urgency guidance only — \u201csee a doctor today\u201d — never a name.",
-              },
-              {
-                icon: MessagesSquare,
-                title: "Community stays separate",
-                body: "Forum experiences are clearly labeled as personal anecdotes and are kept visually and structurally apart from clinical evidence.",
-              },
-              {
-                icon: Pill,
-                title: "Doctor-mediated treatment",
-                body: "No treatment step is ever surfaced automatically. A physician reviews the evidence trail and confirms before anything moves forward.",
-              },
-            ].map((item, index) => (
-              <Reveal
-                key={item.title}
-                delay={index * 90}
-                className="rounded-3xl border border-border bg-surface p-6 shadow-soft sm:p-7"
-              >
-                <span className="flex size-10 items-center justify-center rounded-xl bg-brand-soft text-accent-attention">
-                  <item.icon className="size-5" />
-                </span>
-                <h3 className="mt-4 font-sans text-lg font-semibold text-ink">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
-              </Reveal>
-            ))}
+        </section>
+        <div className="pulse-band"><PulseLine /></div>
+        <section id="how-it-works" className="page-section">
+          <div className="page-container">
+            <Reveal><h2>How it works</h2></Reveal>
+            <ol className="steps-grid">{steps.map((step, i) => <Reveal as="li" key={step.title} delay={i * 70} className="step-column"><span className="step-number">{i + 1}</span><h3 className="mt-5 text-[26px] font-medium text-ink">{step.title}</h3><p className="mt-3 leading-relaxed text-muted-foreground">{step.body}</p></Reveal>)}</ol>
           </div>
-        </div>
-      </section>
-
-      {/* FINAL CTA */}
-      <section id="get-started" className="border-t border-border bg-hero-aura py-24 sm:py-32">
-        <div className="mx-auto grid max-w-5xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2">
-          <Reveal>
-            <h2 className="font-sans text-3xl font-semibold text-ink sm:text-5xl">
-              Try it today
-            </h2>
-            <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Join the list for product updates and early access — or skip the form entirely and
-              open the app right now.
-            </p>
-            <div className="mt-8">
-              <OpenAppButton size="lg" />
+        </section>
+        <section id="features" className="page-section features-section">
+          <div className="page-container">
+            <Reveal className="feature-header"><h2>Built for both sides of<br className="hidden sm:block" /> the conversation</h2><div className="audience-toggle" role="group" aria-label="Choose audience"><Button variant="ghost" aria-pressed={audience === "patients"} className={audience === "patients" ? "audience-button active" : "audience-button"} onClick={() => setAudience("patients")}>For patients</Button><Button variant="ghost" aria-pressed={audience === "clinicians"} className={audience === "clinicians" ? "audience-button active" : "audience-button"} onClick={() => setAudience("clinicians")}>For clinicians</Button></div></Reveal>
+            <div className="feature-content">
+              <Reveal><div>{features.map(feature => <div className="feature-item" key={feature.title}><h3 className="text-xl font-medium text-ink">{feature.title}</h3><p className="mt-2 leading-relaxed text-muted-foreground">{feature.body}</p></div>)}</div>{audience === "patients" && <p className="mt-6 text-sm leading-relaxed text-muted-foreground">Also included: daily check-ins, community experiences labeled as personal anecdotes, and a one-tap hand-off to your doctor.</p>}</Reveal>
+              <Reveal delay={100}><div aria-live="polite">{audience === "patients" ? <PatientIllustration /> : <ClinicianIllustration />}</div></Reveal>
             </div>
-          </Reveal>
-          <Reveal delay={120}>
-            <SignupForm />
-          </Reveal>
-        </div>
-      </section>
-
-      {/* FOOTER */}
-      <footer className="border-t border-border bg-surface py-12">
-        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 sm:px-8 md:flex-row md:items-end md:justify-between">
-          <div>
-            <div className="flex items-center gap-2.5">
-              <span className="flex size-8 items-center justify-center rounded-lg bg-brand text-primary-foreground">
-                <Activity className="size-4" />
-              </span>
-              <span className="font-sans text-base font-semibold text-ink">
-                AI Health Companion
-              </span>
-            </div>
-            <p className="mt-3 max-w-sm text-sm text-muted-foreground">
-              Organized symptoms, evidence-backed guidance, and a real clinician in the loop.
-            </p>
           </div>
-          <p className="max-w-md text-xs leading-relaxed text-muted-foreground md:text-right">
-            AI Health Companion is a decision-support tool and does not replace professional medical
-            care.
-          </p>
-        </div>
-      </footer>
+        </section>
+        <section id="trust" className="trust-band page-section">
+          <div className="page-container">
+            <Reveal><h2>Careful by design</h2></Reveal>
+            <div className="trust-grid">{[
+              {title: "No diagnosis", body: "Nothing here diagnoses you. It is decision support for you and your clinician."},
+              {title: "A name only when it is safe", body: 'You see a condition name only when confidence is well established, the evidence is real, and the case is benign. Otherwise you get urgency guidance, like “see a doctor today.”'},
+              {title: "Community stays separate", body: "Forum experiences are labeled as personal anecdotes and kept apart from clinical evidence."},
+            ].map((item, i) => <Reveal key={item.title} delay={i * 70}><h3>{item.title}</h3><p>{item.body}</p></Reveal>)}</div>
+          </div>
+        </section>
+        <section id="get-started" className="page-section">
+          <div className="page-container cta-grid">
+            <Reveal><h2>Try it today</h2><p className="mt-5 max-w-sm text-lg leading-relaxed text-muted-foreground">Open the app now, or join the list for updates and early access.</p><div className="mt-8"><OpenAppButton size="lg" /></div></Reveal>
+            <Reveal delay={100} className="signup-card"><SignupForm /></Reveal>
+          </div>
+        </section>
+      </main>
+      <footer className="landing-footer"><div className="page-container footer-content"><a href="#top" className="brand-logo"><Activity className="size-6" /><span>AI Health Companion</span></a><p>A decision-support tool. It does not replace professional medical care.</p></div></footer>
     </div>
   );
 }
