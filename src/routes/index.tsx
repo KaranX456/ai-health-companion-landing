@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Activity, ArrowRight, Check, AlertTriangle } from "lucide-react";
+import { Activity } from "lucide-react";
 import { useState } from "react";
 
 import { Nav } from "@/components/landing/Nav";
@@ -52,21 +52,13 @@ const clinicianFeatures = [
 function PulseLine() {
   return (
     <svg
-      viewBox="0 0 800 200"
+      viewBox="0 0 1200 120"
       fill="none"
       aria-hidden="true"
-      className="pulse-line w-full text-accent-attention"
+      className="pulse-line"
     >
-      <path
-        d="M0 100h180l24-46 26 92 30-124 34 158 26-80h60l20-30 22 60 24-24h334"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        opacity="0.85"
-      />
-      <path d="M0 140h800" stroke="currentColor" strokeWidth="1" opacity="0.12" />
-      <path d="M0 60h800" stroke="currentColor" strokeWidth="1" opacity="0.12" />
+      <path className="pulse-base" d="M0 60H430l22-26 24 56 30-82 34 98 26-46h50l18-18 20 34 22-14H1200" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path className="pulse-accent" d="M0 60H430l22-26 24 56 30-82 34 98 26-46h50l18-18 20 34 22-14H1200" pathLength="1" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -78,19 +70,18 @@ function HeroCards() {
     <div className="hero-product">
       <div className="product-backdrop" aria-hidden="true" />
       <div className="card patient-today">
-        <div className="product-heading"><Activity className="size-4 text-brand" /><span>Patient app · Today</span><span className="status-dot" /></div>
-        <div className="mt-7 flex items-start justify-between gap-4">
-          <div><h3 className="text-lg font-semibold text-ink">Morning dose</h3><p className="mt-1 text-sm text-muted-foreground">Confirm once you have taken it.</p></div>
-          <span className="dose-mark" aria-hidden="true"><Check className="size-4" /></span>
+        <div className="product-heading"><span>Today</span><span>Patient app</span></div>
+        <div className="dose-copy">
+          <h3>Morning dose</h3><p>Confirm once you have taken it.</p>
         </div>
-        <Button className="demo-primary mt-5" onClick={() => setTaken(true)}><Check className="size-4" />{taken ? "Dose confirmed" : "Yes, I took it"}</Button>
-        <div className="mt-6 border-t border-border pt-5">
-          <h3 className="text-base font-medium text-ink">Headache behind the eyes</h3>
-          <div className="mt-2 flex items-center justify-between gap-3"><p className="text-sm text-muted-foreground">Logged this morning</p><div className="severity" role="img" aria-label="Severity 3 of 5">{[0,1,2,3,4].map(i => <span key={i} className={i < 3 ? "filled" : ""} />)}</div></div>
+        <Button className="demo-primary dose-button" onClick={() => setTaken(true)}>{taken ? "Dose confirmed" : "Yes, I took it"}</Button>
+        <div className="symptom-summary">
+          <div><h3>Headache behind the eyes</h3><p>Logged this morning</p></div>
+          <div className="severity" role="img" aria-label="Severity 3 of 5">{[0,1,2,3,4].map(i => <span key={i} className={i < 3 ? "filled" : ""} />)}</div>
         </div>
       </div>
       <div className="card-dark evidence-card">
-        <div className="product-heading"><span>Evidence trail · Clinician view</span><span className="evidence-dot" /></div>
+        <div className="product-heading"><span>Evidence trail</span><span>Clinician view</span></div>
         <div className="evidence-rows">
           <div><span>Tension-type headache</span><span className="evidence-pill established">Well-established</span></div>
           <div><span>Migraine</span><span className="evidence-pill">Moderate</span></div>
@@ -107,11 +98,11 @@ function PatientIllustration() {
   const [sent, setSent] = useState(false);
   return (
     <div className="card feature-illustration">
-      <div className="product-heading"><span>Symptom timeline</span><Activity className="size-4 text-brand" /></div>
+      <h3>Symptom timeline</h3>
       <div className="timeline-rows">{[
         ["Mon", "Headache behind the eyes"], ["Wed", "Light sensitivity"], ["Fri", "Headache, after screens"],
-      ].map(([day, symptom], i) => <div className="timeline-row" key={day}><span className="text-sm text-muted-foreground">{day}</span><div><p className="text-base font-medium text-ink">{symptom}</p><span className={`timeline-bar timeline-bar-${i}`} /></div></div>)}</div>
-      <div className="border-t border-border pt-5"><p className="mb-4 text-sm text-muted-foreground">{sent ? "Example summary sent" : "Pre-visit summary ready"}</p><Button className="demo-primary" onClick={() => setSent(true)}>{sent ? "Sent to my doctor" : "Send to my doctor"}<ArrowRight className="size-4" /></Button></div>
+      ].map(([day, symptom], i) => <div className="timeline-row" key={day}><span className="timeline-day">{day}</span><p className="timeline-symptom">{symptom}</p><span className={`timeline-bar timeline-bar-${i}`} /></div>)}</div>
+      <div className="timeline-footer"><p>{sent ? "Example summary sent" : "Pre-visit summary ready"}</p><Button className="demo-primary" onClick={() => setSent(true)}>{sent ? "Sent to my doctor" : "Send to my doctor"}</Button></div>
     </div>
   );
 }
@@ -122,10 +113,10 @@ function ClinicianIllustration() {
   const [assessment, setAssessment] = useState("Assessment: working assessment drafted from the evidence trail. Edit, then finalize.");
   return (
     <div className="card feature-illustration">
-      <div className="safety-flag"><AlertTriangle className="size-5 shrink-0" /><div><h3 className="font-semibold">Safety flag</h3><p className="mt-2 text-sm leading-relaxed">Possible interaction between two active medications. Review before prescribing.</p></div></div>
-      <div className="mt-7 flex items-center justify-between"><h3 className="text-lg font-semibold text-ink">SOAP note</h3><span className="draft-chip">AI draft</span></div>
-      {editing ? <textarea aria-label="Edit SOAP assessment" className="soap-input" value={assessment} onChange={event => setAssessment(event.target.value)} /> : <p className="my-5 text-base leading-relaxed text-muted-foreground">{assessment}</p>}
-      <div className="flex gap-3"><Button className="demo-primary" onClick={() => { setFinalized(true); setEditing(false); }}>{finalized ? "Finalized" : "Finalize"}</Button><Button variant="outline" className="demo-outline" onClick={() => {setEditing(!editing); setFinalized(false);}}>{editing ? "Save edit" : "Edit"}</Button></div>
+      <div className="safety-flag"><h3>Safety flag</h3><p>Possible interaction between two active medications. Review before prescribing.</p></div>
+      <div className="soap-heading"><h3>SOAP note</h3><span className="draft-chip">AI draft</span></div>
+      {editing ? <textarea aria-label="Edit SOAP assessment" className="soap-input" value={assessment} onChange={event => setAssessment(event.target.value)} /> : <p className="soap-assessment">{assessment}</p>}
+      <div className="soap-actions"><Button className="demo-primary" onClick={() => { setFinalized(true); setEditing(false); }}>{finalized ? "Finalized" : "Finalize"}</Button><Button variant="outline" className="demo-outline" onClick={() => {setEditing(!editing); setFinalized(false);}}>{editing ? "Save edit" : "Edit"}</Button></div>
     </div>
   );
 }
@@ -140,26 +131,26 @@ function Landing() {
         <section className="hero-section">
           <div className="page-container hero-grid">
             <Reveal className="hero-copy">
-              <h1>Organized symptoms.<br />Reviewed by a real clinician.</h1>
+              <h1>Organized symptoms. Reviewed by a real clinician.</h1>
               <p className="hero-description">Track what you feel, get evidence-linked guidance, and bring a clear record to your doctor.</p>
               <div className="hero-actions"><OpenAppButton size="lg" /><a className="text-link" href="#how-it-works">See how it works</a></div>
-              <p className="mt-5 text-sm text-muted-foreground">Decision support, not diagnosis.</p>
+              <p className="hero-note">Decision support, not diagnosis.</p>
             </Reveal>
-            <Reveal delay={120}><HeroCards /></Reveal>
+            <Reveal delay={120} className="hero-visual"><HeroCards /></Reveal>
           </div>
         </section>
-        <div className="pulse-band"><PulseLine /></div>
+        <div className="page-container pulse-band"><PulseLine /></div>
         <section id="how-it-works" className="page-section">
           <div className="page-container">
             <Reveal><h2>How it works</h2></Reveal>
-            <ol className="steps-grid">{steps.map((step, i) => <Reveal as="li" key={step.title} delay={i * 70} className="step-column"><span className="step-number">{i + 1}</span><h3 className="mt-5 text-[26px] font-medium text-ink">{step.title}</h3><p className="mt-3 leading-relaxed text-muted-foreground">{step.body}</p></Reveal>)}</ol>
+            <ol className="steps-grid">{steps.map((step, i) => <Reveal as="li" key={step.title} delay={i * 70} className="step-column"><span className="step-number">{i + 1}</span><h3>{step.title}</h3><p>{step.body}</p></Reveal>)}</ol>
           </div>
         </section>
         <section id="features" className="page-section features-section">
           <div className="page-container">
-            <Reveal className="feature-header"><h2>Built for both sides of<br className="hidden sm:block" /> the conversation</h2><div className="audience-toggle" role="group" aria-label="Choose audience"><Button variant="ghost" aria-pressed={audience === "patients"} className={audience === "patients" ? "audience-button active" : "audience-button"} onClick={() => setAudience("patients")}>For patients</Button><Button variant="ghost" aria-pressed={audience === "clinicians"} className={audience === "clinicians" ? "audience-button active" : "audience-button"} onClick={() => setAudience("clinicians")}>For clinicians</Button></div></Reveal>
+            <Reveal className="feature-header"><h2>Built for both sides of the conversation</h2><div className="audience-toggle" role="group" aria-label="Choose audience"><Button variant="ghost" aria-pressed={audience === "patients"} className={audience === "patients" ? "audience-button active" : "audience-button"} onClick={() => setAudience("patients")}>For patients</Button><Button variant="ghost" aria-pressed={audience === "clinicians"} className={audience === "clinicians" ? "audience-button active" : "audience-button"} onClick={() => setAudience("clinicians")}>For clinicians</Button></div></Reveal>
             <div className="feature-content">
-              <Reveal><div>{features.map(feature => <div className="feature-item" key={feature.title}><h3 className="text-xl font-medium text-ink">{feature.title}</h3><p className="mt-2 leading-relaxed text-muted-foreground">{feature.body}</p></div>)}</div>{audience === "patients" && <p className="mt-6 text-sm leading-relaxed text-muted-foreground">Also included: daily check-ins, community experiences labeled as personal anecdotes, and a one-tap hand-off to your doctor.</p>}</Reveal>
+              <Reveal><div>{features.map(feature => <div className="feature-item" key={feature.title}><h3>{feature.title}</h3><p>{feature.body}</p></div>)}</div>{audience === "patients" && <p className="feature-note">Also included: daily check-ins, community experiences labeled as personal anecdotes, and a one-tap hand-off to your doctor.</p>}</Reveal>
               <Reveal delay={100}><div aria-live="polite">{audience === "patients" ? <PatientIllustration /> : <ClinicianIllustration />}</div></Reveal>
             </div>
           </div>
@@ -176,12 +167,12 @@ function Landing() {
         </section>
         <section id="get-started" className="page-section">
           <div className="page-container cta-grid">
-            <Reveal><h2>Try it today</h2><p className="mt-5 max-w-sm text-lg leading-relaxed text-muted-foreground">Open the app now, or join the list for updates and early access.</p><div className="mt-8"><OpenAppButton size="lg" /></div></Reveal>
+            <Reveal><h2>Try it today</h2><p className="cta-description">Open the app now, or join the list for updates and early access.</p><div className="cta-action"><OpenAppButton size="lg" /></div></Reveal>
             <Reveal delay={100} className="signup-card"><SignupForm /></Reveal>
           </div>
         </section>
       </main>
-      <footer className="landing-footer"><div className="page-container footer-content"><a href="#top" className="brand-logo"><Activity className="size-6" /><span>AI Health Companion</span></a><p>A decision-support tool. It does not replace professional medical care.</p></div></footer>
+      <footer className="landing-footer"><div className="page-container footer-content"><a href="#top" className="brand-logo"><span className="logo-tile"><Activity /></span><span>AI Health Companion</span></a><p>A decision-support tool. It does not replace professional medical care.</p></div></footer>
     </div>
   );
 }

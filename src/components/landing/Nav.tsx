@@ -23,25 +23,25 @@ export function Nav() {
           : "border-b border-transparent",
       )}
     >
-      <nav className="page-container flex min-h-20 items-center justify-between gap-4 py-3.5">
+      <nav className="page-container landing-nav">
         <a href="#top" className="brand-logo">
-          <span className="flex size-7 items-center justify-center text-brand">
-            <Activity className="size-6" />
+          <span className="logo-tile">
+            <Activity />
           </span>
-          <span className="nav-brand-name text-base font-semibold text-ink">
+          <span className="nav-brand-name">
             AI Health Companion
           </span>
         </a>
-        <div className="flex items-center gap-5">
+        <div className="nav-actions">
           <a
             href="#how-it-works"
-            className="hidden min-h-11 items-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground md:inline-flex"
+            className="nav-link"
           >
             How it works
           </a>
           <a
             href="#trust"
-            className="hidden min-h-11 items-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground md:inline-flex"
+            className="nav-link"
           >
             Trust and safety
           </a>
