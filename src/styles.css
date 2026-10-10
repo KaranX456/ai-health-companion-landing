@@ -282,7 +282,7 @@
 .hero-note { margin-top: 22px; font-size: 14px; color: var(--mockup-muted); }
 .landing-page a:focus-visible, .landing-page button:focus-visible, .landing-page textarea:focus-visible { outline: 2px solid var(--ring); outline-offset: 4px; }
 .landing-page a.group, .signup-card button[type="submit"] { position: relative; overflow: hidden; isolation: isolate; background-color: var(--brand); background-image: var(--gloss-overlay); box-shadow: var(--gloss-shadow); border-radius: 999px; min-height: 44px; color: var(--brand-foreground); padding: 16px 30px; font-size: 17px; font-weight: 600; }
-.landing-nav a.group { padding: 11px 22px; font-size: 15px; }
+.landing-nav a.group { padding: 11px 22px; font-size: 15px; white-space: nowrap; flex-shrink: 0; }
 .landing-page a.group::after, .signup-card button[type="submit"]::after { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--sheen); transform: translateX(-130%) skewX(-20deg); pointer-events: none; }
 .landing-page a.group:hover::after, .signup-card button[type="submit"]:hover::after { animation: button-sheen .6s ease; }
 @keyframes button-sheen { to { transform: translateX(130%) skewX(-20deg); } }
@@ -388,7 +388,7 @@
  .footer-content { flex-direction: column; align-items: flex-start; gap: 14px; }
 }
 @media(max-width: 400px) {
- .landing-nav { gap: 8px; } .nav-brand-name { max-width: 110px; font-size: 15px; } .landing-nav a.group { padding-inline: 12px; font-size: 14px; }
+ .landing-nav { gap: 8px; } .nav-brand-name { max-width: 100px; font-size: 15px; } .landing-nav a.group { padding-inline: 12px; font-size: 14px; }
  .evidence-rows > div { align-items: flex-start; flex-direction: column; gap: 6px; }
  .timeline-row { gap: 6px; } .timeline-day { width: 32px; }
 }
